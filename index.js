@@ -241,7 +241,7 @@ module.exports = (robot, { getRouter }, Settings = require('./lib/settings')) =>
     if (installations.length > 0) {
       // Check if the GH_ORG environment variable is set and find the corresponding installation
       const installation = env.GH_ORG
-        ? installations.find(i => i.account.login === env.GH_ORG)
+        ? installations.find(i => i.account.login.toLowerCase() === env.GH_ORG.toLowerCase())
         : installations[0]
       if (!installation) {
         robot.log.error(`No installation found for GH_ORG=${env.GH_ORG}`)
