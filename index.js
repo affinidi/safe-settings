@@ -256,7 +256,8 @@ module.exports = (robot, { getRouter }, Settings = require('./lib/settings')) =>
         log: robot.log,
         repo: () => { return { repo: env.ADMIN_REPO, owner: installation.account.login } }
       }
-      return syncAllSettings(nop, context)
+      // Read the admin repo config at FULL_SYNC_REF (e.g. a PR head) instead of the default branch
+      return syncAllSettings(nop, context, context.repo(), env.FULL_SYNC_REF)
     }
     return null
   }
